@@ -106,7 +106,7 @@
         curveLayer = [CAShapeLayer layer];
     }
     
-    curveLayer.lineWidth = 1;
+    curveLayer.lineWidth = 2;
     curveLayer.strokeColor = [UIColor colorWithRed:255.0f/255.0f green:82.0f/255.0f blue:82.0f/255.0f alpha:1].CGColor;
     curveLayer.path = linePath.CGPath;
     curveLayer.fillColor = nil; // 默认为blackColor
