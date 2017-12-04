@@ -15,6 +15,7 @@
 		DC1BF8E81FD5132C0002914B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BF8E71FD5132C0002914B /* main.m */; };
 		DC1BF8F21FD5132C0002914B /* GrahpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BF8F11FD5132C0002914B /* GrahpTests.m */; };
 		DC1BF8FD1FD5132C0002914B /* GrahpUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BF8FC1FD5132C0002914B /* GrahpUITests.m */; };
+		DC1BF90C1FD517A60002914B /* GrahpView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BF90B1FD517A60002914B /* GrahpView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		DC1BF8F81FD5132C0002914B /* GrahpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrahpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1BF8FC1FD5132C0002914B /* GrahpUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrahpUITests.m; sourceTree = "<group>"; };
 		DC1BF8FE1FD5132C0002914B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC1BF90A1FD517A60002914B /* GrahpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrahpView.h; sourceTree = "<group>"; };
+		DC1BF90B1FD517A60002914B /* GrahpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrahpView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				DC1BF8E31FD5132C0002914B /* LaunchScreen.storyboard */,
 				DC1BF8E61FD5132C0002914B /* Info.plist */,
 				DC1BF8E71FD5132C0002914B /* main.m */,
+				DC1BF90A1FD517A60002914B /* GrahpView.h */,
+				DC1BF90B1FD517A60002914B /* GrahpView.m */,
 			);
 			path = Grahp;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				DC1BF8DD1FD5132C0002914B /* ViewController.m in Sources */,
 				DC1BF8E81FD5132C0002914B /* main.m in Sources */,
 				DC1BF8DA1FD5132C0002914B /* AppDelegate.m in Sources */,
+				DC1BF90C1FD517A60002914B /* GrahpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

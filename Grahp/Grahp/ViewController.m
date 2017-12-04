@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+#import "GrahpView.h"
 
 @interface ViewController ()
 
@@ -13,9 +14,14 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    GrahpView *grahp = [[GrahpView alloc] initWithCenter:self.view.center];
+    [self.view addSubview:grahp];
+    
 }
 
 
