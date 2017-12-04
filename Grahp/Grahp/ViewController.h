@@ -6,8 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GrahpView.h"
 
 @interface ViewController : UIViewController
+{
+    GrahpView *grahp;
+}
 
 
 @end

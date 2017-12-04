@@ -6,13 +6,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "POP.h"
 
 @interface GrahpView : UIView
 {
-    
+    NSMutableArray *curvePoint;
+    CAShapeLayer *curveLayer;
 }
 
-@property (nonatomic,strong)NSMutableArray *curvePoint;
+@property (nonatomic,copy)NSArray *curveInformationPoint;
 
 -(id)initWithCenter:(CGPoint)center;
 

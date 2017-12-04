@@ -22,14 +22,14 @@
         self.center = center;
         self.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
         
-        self.curvePoint = [NSMutableArray arrayWithObjects:[NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*0,155-155/6*3)],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*0,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*1,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*2,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*3,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*4,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*5,155-155/6*(arc4random() % 5))],
-                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*6,155-155/6*3)],nil];
+//        curvePoint = [NSMutableArray arrayWithObjects:[NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*0,155-155/6*3)],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*0,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*1,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*2,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*3,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*4,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*5,155-155/6*(arc4random() % 5))],
+//                           [NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*6,155-155/6*3)],nil];
         
         [self drawCoordinateAxis];
         
@@ -44,12 +44,41 @@
         {
             [self addVerticalLabelWithIndex:i];
         }
-        [self drawCurve];
+        
+//        [self drawCurve];
         
     }
     
     return self;
     
+}
+#pragma mark - 数据处理相关方法
+
+-(void)setCurveInformationPoint:(NSArray *)curveInformationPoint
+{
+    if (!curvePoint)
+    {
+        curvePoint = [NSMutableArray array];
+    }
+    else
+    {
+        [curvePoint removeAllObjects];
+        [curveLayer removeFromSuperlayer];
+    }
+    
+    [curvePoint addObject:[NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*0,155-155/6*3)]];
+    
+    CGPoint point = CGPointZero;
+    
+    for (int i = 0; i<curveInformationPoint.count; i++)
+    {
+        point = [[curveInformationPoint objectAtIndex:i] CGPointValue];
+         [curvePoint addObject:[NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*point.x,155-155/6*point.y)]];
+    }
+    
+    [curvePoint addObject:[NSValue valueWithCGPoint:CGPointMake(45+(SCREEN_WIDTH-15)/7*6,155-155/6*3)]];
+    
+    [self drawCurve];
 }
 
 #pragma mark - 绘制曲线相关方法
@@ -58,12 +87,12 @@
     // 线的路径
     UIBezierPath *linePath = [UIBezierPath bezierPath];
     
-    for (NSInteger i = 0; i < self.curvePoint.count-3; i++)
+    for (NSInteger i = 0; i < curvePoint.count-3; i++)
     {
-        CGPoint p1 = [[self.curvePoint objectAtIndex:i] CGPointValue];
-        CGPoint p2 = [[self.curvePoint objectAtIndex:i+1] CGPointValue];
-        CGPoint p3 = [[self.curvePoint objectAtIndex:i+2] CGPointValue];
-        CGPoint p4 = [[self.curvePoint objectAtIndex:i+3] CGPointValue];
+        CGPoint p1 = [[curvePoint objectAtIndex:i] CGPointValue];
+        CGPoint p2 = [[curvePoint objectAtIndex:i+1] CGPointValue];
+        CGPoint p3 = [[curvePoint objectAtIndex:i+2] CGPointValue];
+        CGPoint p4 = [[curvePoint objectAtIndex:i+3] CGPointValue];
         if (i == 0)
         {
             [linePath moveToPoint:p2];
@@ -72,14 +101,20 @@
     }
     
     //线的样式
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    lineLayer.lineWidth = 1;
-    lineLayer.strokeColor = [UIColor colorWithRed:255.0f/255.0f green:82.0f/255.0f blue:82.0f/255.0f alpha:1].CGColor;
-    lineLayer.path = linePath.CGPath;
-    lineLayer.fillColor = nil; // 默认为blackColor
+    if (!curveLayer)
+    {
+        curveLayer = [CAShapeLayer layer];
+    }
+    
+    curveLayer.lineWidth = 1;
+    curveLayer.strokeColor = [UIColor colorWithRed:255.0f/255.0f green:82.0f/255.0f blue:82.0f/255.0f alpha:1].CGColor;
+    curveLayer.path = linePath.CGPath;
+    curveLayer.fillColor = nil; // 默认为blackColor
     
     //显示
-    [self.layer addSublayer:lineLayer];
+    [self.layer addSublayer:curveLayer];
+    
+    [self doAnimation];
 }
 
 //计算控制点
@@ -114,6 +149,18 @@
     ctrl2_y = ym2 + (yc2 - ym2) * smooth_value + y2 - ym2;
     [path addCurveToPoint:CGPointMake(x2, y2) controlPoint1:CGPointMake(ctrl1_x, ctrl1_y) controlPoint2:CGPointMake(ctrl2_x, ctrl2_y)];
 }
+
+#pragma mark 动画实现
+-(void)doAnimation
+{
+    POPBasicAnimation * curveAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPShapeLayerStrokeEnd];
+    curveAnimation.fromValue = @(0);
+    curveAnimation.toValue = @(1);
+    curveAnimation.duration = 2;//动画持续时间
+    curveAnimation.removedOnCompletion = NO;
+    [curveLayer pop_addAnimation:curveAnimation forKey:@"CurveAnimation"];
+}
+
 
 #pragma mark - 绘制坐标系相关方法
 
