@@ -29,6 +29,12 @@
     [testBtn addTarget:self action:@selector(testBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
     
+    /*
+    //HTML解析
+    NSMutableAttributedString * content = [[NSMutableAttributedString alloc] initWithData:[self.model.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    [content addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, content.length-1)];
+    */
+    
 }
 
 

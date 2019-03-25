@@ -1,0 +1,142 @@
+//
+//  PrefixHeader.pch
+//  Grahp
+//
+//  Created by new on 2019/3/25.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#pragma mark - 屏幕宽高
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#pragma mark - 导航栏，状态栏，TabBar的高度
+#define StatusBar_Height [UIApplication sharedApplication].statusBarFrame.size.height
+#define NavBar_Height 44.0
+#define Nav_StatusBar_Height (NavBar_Height + StatusBar_Height)
+#define TabBar_Height ([UIApplication sharedApplication].statusBarFrame.size.height > 20 ? 83 : 49)
+#define KBottomSpace_Height ([UIApplication sharedApplication].statusBarFrame.size.height > 20 ? 34 : 0)
+
+#define StatusHeight (44 + [UIApplication sharedApplication].statusBarFrame.size.height)
+#define CSfont(size)  [UIFont systemFontOfSize:(size)]
+#define CSCOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#pragma mark -  颜色相关
+#define UICOLOR_FROMRGB(rgbValue) [UIColor colorWithRed:((float)(((rgbValue) & 0xFF0000) >> 16))/255.0 green:((float)(((rgbValue) & 0xFF00) >> 8))/255.0 blue:((float)((rgbValue) & 0xFF))/255.0 alpha:1.0]
+#define RGB(A,B,C) [UIColor colorWithRed:((float)(A))/255.0 green:((float)(B))/255.0 blue:((float)(C))/255.0 alpha:1.0]
+#define RGBA(A,B,C,D) [UIColor colorWithRed:((float)(A))/255.0 green:((float)(B))/255.0 blue:((float)(C))/255.0 alpha:(float)(D)]
+#define RandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+
+#pragma make - 常用颜色
+#define WQ_COLOR_BLACK UICOLOR_FROMRGB(0x000000)
+#define WQ_COLOR_WHITE UICOLOR_FROMRGB(0xffffff)
+#define WQ_COLOR_GRAY UICOLOR_FROMRGB(0xe6e6e6)
+#define WQ_COLOR_RED UICOLOR_FROMRGB(0xEE242A)
+#define WQ_COLOR_ORANGE UICOLOR_FROMRGB(0xFF8010)
+#define WQ_COLOR_GREED UICOLOR_FROMRGB(0x4ABA7D)
+
+
+#define WQ_COLOR_GRAY_22 UICOLOR_FROMRGB(0x222222)
+#define WQ_COLOR_GRAY_66 UICOLOR_FROMRGB(0x666666)
+#define WQ_COLOR_GRAY_99 UICOLOR_FROMRGB(0x999999)
+#define WQ_COLOR_GRAY_CC UICOLOR_FROMRGB(0xcccccc)
+#define WQ_COLOR_GRAY_B5 UICOLOR_FROMRGB(0xb5b5b5)
+#define WQ_COLOR_GRAY_DD UICOLOR_FROMRGB(0xdddddd)
+
+#define THEME_COLOR UICOLOR_FROMRGB(0xEE242A)//主题颜色
+#define STHEME_COLOR UICOLOR_FROMRGB(0xEE8636)//次主题颜色
+#define MAIN_BACKGROUND_COLOR UICOLOR_FROMRGB(0xf8f8f8)//主背景色
+#define SEPARATELINE_COLOR UICOLOR_FROMRGB(0xe6e6e6)//分割线颜色
+
+#pragma mark - 常用数值
+#define WQ_MARGIN_LEFT 15
+#define WQ_MARGIN_RIGHGT WQ_MARGIN_LEFT
+
+#pragma make - 常有字号
+#define WQ_FONT(size) [UIFont systemFontOfSize:(size)]
+#define WQ_FONT8  WQ_FONT(8)
+#define WQ_FONT9  WQ_FONT(9)
+#define WQ_FONT10  WQ_FONT(10)
+#define WQ_FONT11  WQ_FONT(11)
+#define WQ_FONT12  WQ_FONT(12)
+#define WQ_FONT13  WQ_FONT(13)
+#define WQ_FONT14  WQ_FONT(14)
+#define WQ_FONT15  WQ_FONT(15)
+#define WQ_FONT17  WQ_FONT(17)
+#define WQ_FONT18  WQ_FONT(18)
+
+#pragma make - 常用图片
+#define WQ_IMG(img) [UIImage imageNamed:(img)]
+#define WQ_HEAD_PLACEHOLDER [UIImage imageNamed:@"icon_default"]
+#define PlaceholderImage [UIImage imageNamed:@""]
+
+#pragma mark - 字符串相关
+#define StrValue(a) [NSString stringWithFormat:@"%@",a]
+//判断字符串是否为空
+#define strIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str isEqualToString:@"Null"] || [str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"] || [str length] < 1 ? YES : NO )
+#define safeString(str) (strIsEmpty(StrValue(str))?@"":StrValue(str))
+
+#pragma mark -  循环引用
+#define WeakSelf __weak typeof(self) weakSelf = self;
+#define WEAKSELF __weak typeof(self) weakSelf = self;
+#define StrongSelf __strong typeof (weakSelf) strongSelf = weakSelf;
+
+#define WeakObj(type)  __weak typeof(type) type##Weak = type;
+#define StrongObj(type)  __strong typeof(type##Weak) type##Strong = type##Weak;
+
+#pragma mark - SVProgressHUD
+/**
+ *  SVHUD 展示 默认隐藏
+ *
+ */
+#define SVHUD_Normal(meg)   {\
+[SVProgressHUD showWithStatus:meg];\
+[SVProgressHUD dismissAfterDelay:4];\
+}
+/**
+ *  SVHUD 展示 默认不隐藏
+ *
+ */
+#define SVHUD_NO_Stop(meg) {\
+[SVProgressHUD showWithStatus:meg];\
+}
+/**
+ *  SVHUD 隐藏
+ *
+ */
+#define SVHUD_Stop [SVProgressHUD dismiss]
+/**
+ *  SVHUD 请求失败
+ */
+#define SVHUD_HTTP_ERROR [SVProgressHUD showErrorWithStatus:@"请求失败"]
+/**
+ *  SVHUD 请求成功
+ */
+#define SVHUD_HTTP_SUCCESS(msg) [SVProgressHUD showSuccessWithStatus:msg?msg:@"请求成功"]
+#define SVHUD_HTTP_Delay_SUCCESS(msg) [SVProgressHUD showSuccessWithStatus:msg?msg:@"请求成功"];[SVProgressHUD dismissWithDelay:1.0];
+/**
+ *  SVHUD 提示
+ */
+#define SVHUD_HINT(msg) [SVProgressHUD showInfoWithStatus:msg]
+#define SVHUD_Delay_HINT(msg) [SVProgressHUD showInfoWithStatus:msg];[SVProgressHUD dismissWithDelay:1.0];
+
+
+#pragma mark -  调试
+#ifdef DEBUG
+#define Log(...) printf("%s %s\n",[[NSDate date] descriptionWithLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]].UTF8String,[[NSString stringWithFormat:__VA_ARGS__] UTF8String]);
+#define DBLog(...) Log(__VA_ARGS__)
+#define DBFuncLog(xx, ...) Log(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
+#else
+#define DBLog(...) /* */
+#define DBFuncLog(xx, ...)
+#endif
+
+
+
+#endif /* PrefixHeader_pch */
