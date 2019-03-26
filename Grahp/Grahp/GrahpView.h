@@ -17,5 +17,5 @@
 @property (nonatomic,copy)NSArray *curveInformationPoint;
 
 -(id)initWithCenter:(CGPoint)center;
-
+//@property (nonatomic, copy) void (^textFieldShouldReturn)(NSString *searchText);
 @end
