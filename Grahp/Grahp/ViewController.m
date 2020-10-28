@@ -57,6 +57,29 @@
 
 -(void)testMath
 {
+    
+//    _mySetp = 0;
+//
+//    if (NSFoundationVersionNumber>=NSFoundationVersionNumber_iOS_8_0)
+//    {
+//        if ([CMPedometer isStepCountingAvailable])//判断系统的计步器是否可以使用(ios8)
+//        {
+//
+//            if (self.setpcount == nil)
+//            {
+//                self.setpcount = [[CMPedometer alloc] init];
+//            }
+//        }
+//        else
+//        {
+//            NSLog(@"error");
+//        }
+//    }
+//    else
+//    {
+//        NSLog(@"请更新系统版本再使用");
+//    }
+    
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //
 //        [self.setpcount startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData * _Nullable pedometerData, NSError * _Nullable error) {
