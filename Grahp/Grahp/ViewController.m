@@ -6,10 +6,15 @@
 //
 
 #import "ViewController.h"
+#import <CoreMotion/CoreMotion.h>
 
 
 @interface ViewController ()
-
+{
+    
+}
+@property(nonatomic,strong)CMPedometer *setpcount;
+@property(nonatomic,assign)int mySetp;
 @end
 
 @implementation ViewController
@@ -46,6 +51,29 @@
                                    [NSValue valueWithCGPoint:CGPointMake(3,(arc4random() % 6))],
                                    [NSValue valueWithCGPoint:CGPointMake(4,(arc4random() % 6))],
                                    [NSValue valueWithCGPoint:CGPointMake(5,(arc4random() % 6))],nil];
+}
+
+#pragma mark 计步
+
+-(void)testMath
+{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//        [self.setpcount startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData * _Nullable pedometerData, NSError * _Nullable error) {
+//            if (error == nil)
+//            {
+//                NSNumber *count = pedometerData.numberOfSteps;
+//                NSLog(@"步数：%d",[count intValue]);
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    self->_testLabel.text = [NSString stringWithFormat:@"你现在的步数是：%d",count.intValue/*self->_mySetp*/];
+//                });
+//            }
+//            else
+//            {
+//                NSLog(@"error");
+//            }
+//        }];
+//    });
 }
 
 - (void)didReceiveMemoryWarning {
